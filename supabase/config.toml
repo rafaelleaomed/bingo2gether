@@ -1,0 +1,10 @@
+project_id = "wsmbsudorcvpdalgbyfy"
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.ai-coach]
+verify_jwt = false

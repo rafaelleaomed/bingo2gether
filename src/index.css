@@ -1,0 +1,673 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 222.2 84% 4.9%;
+
+    /* Skin RGB helpers */
+    --skin-primary-rgb: 193, 60, 122;
+    --skin-accent-rgb: 230, 194, 110;
+  }
+
+  .dark,
+  .theme-carbon {
+    --background: 0 0% 4%;
+    /* #0a0a0a - Deep Black */
+    --foreground: 0 0% 98%;
+    /* Pure White text */
+
+    --card: 0 0% 7%;
+    /* Slightly lighter for cards */
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 157 100% 50%;
+    /* #00ff9f - Electric Green (Carbon PRO accent) */
+    --primary-foreground: 0 0% 4%;
+    /* Contrast against neon */
+
+    --secondary: 0 0% 12%;
+    /* Deep cool gray */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+    /* Light gray for subtext */
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 157 100% 50%;
+
+    --destructive: 350 100% 60%;
+    /* #ff3366 - Premium destructive red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 15%;
+    /* Subtle borders */
+    --input: 0 0% 15%;
+    --ring: 157 100% 50%;
+    /* Focus rings are neon */
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 157 100% 50%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 157 100% 50%;
+
+    --skin-primary-rgb: 230, 194, 110;
+    --skin-accent-rgb: 0, 243, 255;
+  }
+
+  .theme-matrimoney {
+    --background: 270 50% 10%;
+    --background-override: transparent;
+    /* Permite ver o ImmersiveBackground.tsx */
+    --foreground: 45 100% 90%;
+    /* Texto creme/ouro claro */
+
+    --card: 270 40% 15%;
+    --card-foreground: 45 100% 95%;
+
+    --popover: 270 40% 15%;
+    --popover-foreground: 45 100% 95%;
+
+    --primary: 43 74% 49%;
+    /* Dourado Premium #D4AF37 */
+    --primary-foreground: 270 50% 10%;
+
+    --secondary: 270 30% 20%;
+    --secondary-foreground: 45 100% 90%;
+
+    --muted: 270 30% 20%;
+    --muted-foreground: 45 40% 70%;
+
+    --accent: 350 40% 30%;
+    /* Rose Gold Escuro */
+    --accent-foreground: 43 74% 49%;
+
+    --destructive: 350 100% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 43 74% 49%;
+    /* Bordas Douradas */
+    --input: 270 30% 20%;
+    --ring: 43 74% 49%;
+
+    --skin-primary-rgb: 212, 175, 55;
+    --skin-accent-rgb: 183, 110, 121;
+  }
+
+  .theme-viagem {
+    --background: 220 50% 10%;
+    --background-override: transparent;
+    --foreground: 190 100% 95%;
+    /* Texto ciano muito claro */
+
+    --card: 220 40% 15%;
+    --card-foreground: 190 100% 95%;
+
+    --popover: 220 40% 15%;
+    --popover-foreground: 190 100% 95%;
+
+    --primary: 190 100% 50%;
+    /* Turquesa/Ciano Vibrante */
+    --primary-foreground: 220 50% 10%;
+
+    --secondary: 220 30% 20%;
+    --secondary-foreground: 190 100% 95%;
+
+    --muted: 220 30% 20%;
+    --muted-foreground: 190 40% 70%;
+
+    --accent: 200 80% 30%;
+    --accent-foreground: 190 100% 50%;
+
+    --destructive: 350 100% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 190 100% 50%;
+    /* Bordas Neon Azul */
+    --input: 220 30% 20%;
+    --ring: 190 100% 50%;
+
+    --skin-primary-rgb: 0, 105, 148;
+    --skin-accent-rgb: 255, 111, 0;
+  }
+
+  .theme-carro {
+    --background: 0 0% 6%;
+    --background-override: transparent;
+    --foreground: 0 0% 95%;
+    /* Branco prateado */
+
+    --card: 0 0% 12%;
+    /* Cinza grafite metálico */
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 100% 45%;
+    /* Vermelho Ferrari Esportivo */
+    --primary-foreground: 0 0% 95%;
+
+    --secondary: 0 0% 20%;
+    /* Cromo escuro */
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 0 0% 25%;
+    --accent-foreground: 0 100% 50%;
+
+    --destructive: 35 100% 50%;
+    /* Laranja alerta */
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 30%;
+    /* Borda metal prateado escuro */
+    --input: 0 0% 20%;
+    --ring: 0 100% 45%;
+
+    --skin-primary-rgb: 239, 68, 68;
+    --skin-accent-rgb: 228, 228, 231;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground;
+    background-color: var(--background-override, hsl(var(--background)));
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+  }
+}
+
+/* Brand variables */
+:root {
+  --brand-purple: #4B1E6D;
+  --brand-magenta: #C13C7A;
+  --brand-gold: #E6C26E;
+  --primary-color: #4B1E6D;
+  --secondary-color: #C13C7A;
+  --accent-color: #E6C26E;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animations */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.2s ease-in-out 0s 2;
+}
+
+@keyframes number-reveal {
+  0% {
+    transform: scale(0) rotateY(180deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.2) rotateY(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(230, 194, 110, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(230, 194, 110, 0.5);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-number-reveal {
+  animation: number-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out forwards;
+}
+
+/* Premium Glassmorphism (Carbon PRO focus) */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px) saturate(1.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass {
+  background: rgba(10, 10, 10, 0.65);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Premium Aurora Background Class Utility */
+.bg-aurora {
+  background-image:
+    radial-gradient(circle at 100% 100%, rgba(0, 255, 159, 0.1) 0, transparent 50%),
+    radial-gradient(circle at 0% 0%, rgba(255, 51, 102, 0.05) 0, transparent 50%);
+  background-size: 200% 200%;
+  animation: aurora 20s ease infinite;
+}
+
+.font-display {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Print Content Portal: hidden on screen */
+#print-content-area {
+  display: none;
+}
+
+/* PNG Export: container used for html-to-image capture */
+.png-export-container {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 794px;
+  /* A4 at 96dpi */
+  background: white;
+  z-index: -1;
+}
+
+/* Print Styles */
+@media print {
+
+  /* Hide ALL direct children of body except the print portal */
+  body>*:not(#print-content-area) {
+    display: none !important;
+  }
+
+  /* Show the print portal with static positioning for natural page flow */
+  #print-content-area {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    color: black !important;
+    overflow: visible !important;
+  }
+
+  #print-content-area * {
+    overflow: visible !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 4mm;
+  }
+
+  /* Table mode: avoid breaking the grid */
+  .print-table-grid {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Cards mode: each .print-page fills exactly one physical page */
+  .print-page {
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    height: 100vh;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box;
+    padding: 2mm 0;
+  }
+
+  .print-page:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  .print-card-item {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print-cards-grid {
+    display: grid !important;
+    gap: 6px !important;
+    flex: 1 !important;
+  }
+
+  /* Make each card expand to fill available space */
+  .print-cards-grid .print-card-item {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+
+  .print-cards-grid .print-card-item .grid {
+    flex: 1 !important;
+  }
+
+  .print-cards-grid .print-card-item .grid>div {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Ensure backgrounds print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* ═══════════════════════════════════════
+   Matrimoney Premium Effects
+   ═══════════════════════════════════════ */
+
+/* Gold shimmer animation for headers */
+@keyframes gold-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.matrimoney-shimmer {
+  background: linear-gradient(90deg, #D4AF37 0%, #F5E6B8 25%, #D4AF37 50%, #B76E79 75%, #D4AF37 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gold-shimmer 4s linear infinite;
+}
+
+/* Floating golden particles */
+@keyframes float-particle-1 {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateY(-100vh) rotate(720deg) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes float-particle-2 {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.5;
+  }
+
+  60% {
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: translateY(-100vh) rotate(-540deg) scale(0.4);
+    opacity: 0;
+  }
+}
+
+@keyframes float-particle-3 {
+  0% {
+    transform: translateY(0) rotate(45deg) scale(0.6);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: translateY(-100vh) rotate(360deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+.matrimoney-particles {
+  position: relative;
+}
+
+.matrimoney-particles::before,
+.matrimoney-particles::after {
+  content: '✦';
+  position: fixed;
+  font-size: 8px;
+  color: #D4AF37;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.matrimoney-particles::before {
+  left: 12%;
+  bottom: -20px;
+  animation: float-particle-1 10s ease-in-out infinite;
+}
+
+.matrimoney-particles::after {
+  right: 18%;
+  bottom: -20px;
+  animation: float-particle-2 14s ease-in-out 4s infinite;
+}
+
+/* Third particle via extra element */
+.matrimoney-particle-extra {
+  position: fixed;
+  bottom: -20px;
+  left: 55%;
+  font-size: 6px;
+  color: #B76E79;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  animation: float-particle-3 18s ease-in-out 7s infinite;
+}
+
+/* Card glow on hover */
+.matrimoney-card-glow {
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.matrimoney-card-glow:hover {
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.2), 0 10px 60px -15px rgba(183, 110, 121, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+/* Glassmorphism premium dark */
+.matrimoney-glass {
+  background: rgba(45, 27, 78, 0.55) !important;
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(212, 175, 55, 0.15) !important;
+}
+
+/* Matrimoney header styles */
+.matrimoney-header {
+  background: rgba(13, 6, 24, 0.4) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: rgba(212, 175, 55, 0.12) !important;
+}
+
+/* Matrimoney progress card override */
+.matrimoney-progress-card {
+  background: linear-gradient(135deg, #2d1b4e 0%, #1a0a2e 50%, #1e0f35 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+}
+
+.matrimoney-progress-card .progress-glow-bar {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
+
+/* Matrimoney draw section override */
+.matrimoney-draw-section {
+  background: linear-gradient(135deg, #3d1f5e 0%, #2d1b4e 100%) !important;
+  border: 1px solid rgba(183, 110, 121, 0.2) !important;
+}
+
+/* Pulsing ring decoration for goal icon */
+@keyframes ring-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
+  }
+}
+
+.matrimoney-ring-pulse {
+  animation: ring-pulse 2.5s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+/* Overlay radial glow */
+.matrimoney-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40vh;
+  background: radial-gradient(ellipse at 50% 0%, rgba(183, 110, 121, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}

@@ -1,0 +1,25 @@
+{
+    "name": "Bingo2Gether",
+    "short_name": "Bingo2Gether",
+    "description": "Construindo o futuro juntos — planeje metas de casal como um jogo!",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#020617",
+    "theme_color": "#7c3aed",
+    "lang": "pt-BR",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "lifestyle",
+        "games",
+        "finance"
+    ],
+    "prefer_related_applications": false
+}

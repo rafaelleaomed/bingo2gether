@@ -1,0 +1,112 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Office AI - Rebalanceamento</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Family Office AI - Rebalanceamento Mensal</h1>
+      <p>Sistema simples para rebalancear carteira via aporte, com bandas dinamicas e simulacao.</p>
+    </header>
+
+    <section class="card">
+      <h2>1) Entrada de dados</h2>
+      <div class="grid base-inputs">
+        <label>Total da carteira (R$)
+          <input id="totalValue" type="number" min="0" step="0.01" value="150000" />
+        </label>
+        <label>Aporte mensal (R$)
+          <input id="monthlyContribution" type="number" min="0" step="0.01" value="4000" />
+        </label>
+      </div>
+
+      <h3>Alocacao atual (%) e alvo (%)</h3>
+      <div id="allocationInputs" class="allocation-grid"></div>
+      <button id="resetTargetsBtn" type="button">Restaurar alvos padrao</button>
+    </section>
+
+    <section class="card">
+      <h2>2) OCR de prints (Investidor10/MyProfit)</h2>
+      <p>Cole o texto OCR extraido do print. O sistema tenta mapear classes e percentuais automaticamente.</p>
+      <textarea id="ocrText" rows="8" placeholder="Exemplo:
+Total: R$ 150.000,00
+Internacional 24%
+Acoes Brasil 28%
+Renda Fixa 20%
+FIIs 13%
+Cripto 10%
+Fundos 5%"></textarea>
+      <div class="actions">
+        <button id="parseOcrBtn" type="button">Preencher por OCR</button>
+        <span id="ocrStatus" class="status"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3) Rebalanceamento mensal</h2>
+      <div class="actions">
+        <button id="rebalanceBtn" type="button">Calcular rebalanceamento</button>
+      </div>
+      <div id="resultWrapper" class="hidden">
+        <table id="resultTable">
+          <thead>
+            <tr>
+              <th>Classe</th>
+              <th>Atual %</th>
+              <th>Alvo %</th>
+              <th>Diferenca (pp)</th>
+              <th>Valor ideal (R$)</th>
+              <th>Comprar c/ aporte (R$)</th>
+              <th>Precisa vender?</th>
+              <th>Venda recomendada (R$)</th>
+              <th>Classificacao</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p id="summaryText" class="summary"></p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4) Simulacao futura</h2>
+      <p>Informe retorno esperado anual por classe (ex.: 0.12 = 12% a.a.).</p>
+      <div id="returnsInputs" class="allocation-grid"></div>
+      <div class="grid base-inputs">
+        <label>Meses
+          <input id="simMonths" type="number" min="1" max="600" value="12" />
+        </label>
+      </div>
+      <div class="actions">
+        <button id="simulateBtn" type="button">Simular 12 meses</button>
+      </div>
+
+      <h3>Historico mensal</h3>
+      <table id="historyTable">
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Patrimonio antes aporte (R$)</th>
+            <th>Patrimonio depois aporte (R$)</th>
+            <th>Score</th>
+            <th>Rating</th>
+            <th>Resumo</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>5) Formato Family Office AI</h2>
+      <pre id="familyOfficeReport" class="report"></pre>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
