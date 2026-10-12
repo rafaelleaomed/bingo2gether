@@ -13,6 +13,27 @@ const PRICES: Record<string, { priceId: string; mode: 'subscription' | 'payment'
   lifetime: { priceId: 'price_1T1GtIAAX8P01k2CkIrfVC1I', mode: 'payment' },
 };
 
+const ALLOWED_ORIGIN_PATTERNS = [
+  /^https:\/\/[a-z0-9-]+\.lovable\.app$/,
+  /^https:\/\/[a-z0-9-]+\.lovableproject\.com$/,
+  /^https:\/\/bingotogether\.lovable\.app$/,
+  /^http:\/\/localhost(:\d+)?$/,
+  /^http:\/\/127\.0\.0\.1(:\d+)?$/,
+];
+
+function getSafeOrigin(reqOrigin: string | null): string {
+  const fallback = 'https://bingotogether.lovable.app';
+  if (!reqOrigin) return fallback;
+  try {
+    const url = new URL(reqOrigin);
+    const originString = url.origin;
+    const isAllowed = ALLOWED_ORIGIN_PATTERNS.some(pattern => pattern.test(originString));
+    return isAllowed ? originString : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -24,7 +45,7 @@ serve(async (req) => {
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY") ?? ""
     );
 
     const authHeader = req.headers.get('Authorization');
@@ -34,6 +55,13 @@ serve(async (req) => {
     const { data } = await supabase.auth.getUser(token);
     const user = data.user;
     if (!user?.email) throw new Error('User not authenticated');
+
+    // Fetch couple_id for metadata
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('couple_id')
+      .eq('id', user.id)
+      .maybeSingle();
 
     const { planType = 'annual', paymentMethod } = await req.json();
     const plan = PRICES[planType] || PRICES.annual;
@@ -47,7 +75,7 @@ serve(async (req) => {
       customerId = customers.data[0].id;
     }
 
-    const origin = req.headers.get('origin') || 'https://id-preview--f1c85475-cef5-43dd-827f-c10ca31a66a4.lovable.app';
+    const safeOrigin = getSafeOrigin(req.headers.get('origin'));
 
     // Boleto payments: must use mode: 'payment' (no subscriptions)
     const isBoleto = paymentMethod === 'boleto';
@@ -59,8 +87,14 @@ serve(async (req) => {
     const sessionParams: any = {
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
-      success_url: `${origin}/payment-success`,
-      cancel_url: `${origin}/`,
+      client_reference_id: user.id,
+      metadata: {
+        userId: user.id,
+        coupleId: profile?.couple_id || '',
+        planType,
+      },
+      success_url: `${safeOrigin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${safeOrigin}/`,
     };
 
     const BOLETO_PRICES: Record<string, number> = {
