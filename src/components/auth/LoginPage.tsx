@@ -20,10 +20,15 @@ const ERROR_MESSAGES: Record<string, string> = {
     'User already registered': 'Este email já está cadastrado. Faça login.',
     'Signup requires a valid password': 'Senha fraca. Use no mínimo 6 caracteres.',
     'Password should be at least 6 characters': 'Senha fraca. Use no mínimo 6 caracteres.',
+    'Unsupported provider: provider is not enabled': 'O login com Google não está ativado no Supabase. Use E-mail e Senha ou Modo Demonstração.',
+    'provider is not enabled': 'O login com Google não está ativado no Supabase. Use E-mail e Senha ou Modo Demonstração.',
 };
 
 function getErrorMessage(err: any): string {
-    const msg = err?.message || '';
+    const msg = typeof err === 'string' ? err : err?.message || err?.error_description || '';
+    if (msg.includes('provider is not enabled') || msg.includes('Unsupported provider')) {
+        return 'O login com Google não está ativado no Supabase. Use E-mail e Senha ou Modo Demonstração.';
+    }
     return ERROR_MESSAGES[msg] || msg || 'Erro inesperado. Tente novamente.';
 }
 

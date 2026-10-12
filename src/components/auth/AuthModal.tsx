@@ -46,7 +46,12 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             await googleLogin();
             // OAuth redirect handles the rest
         } catch (err: any) {
-            setError(err?.message || 'Falha ao autenticar com Google');
+            const msg = err?.message || '';
+            if (msg.includes('provider is not enabled') || msg.includes('Unsupported provider')) {
+                setError('O login com Google não está ativado no Supabase. Use E-mail e Senha.');
+            } else {
+                setError(msg || 'Falha ao autenticar com Google');
+            }
         } finally {
             setLoading(false);
         }
